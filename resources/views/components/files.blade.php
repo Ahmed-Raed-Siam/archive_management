@@ -13,11 +13,11 @@
                             :created={{ $file->created_at }}/>
 
     @elseif ($file->file_type === 'text/plain')
-        @if (substr($file->name, strrpos($file->name, '.')+1) === 'js')
+        @if ( substr($file->name, strrpos($file->name, '.')+1) === 'js')
             <x-layout-file-item :id="{{ $file->id }}" :name="{{ $file->name }}" :icon="'fab fa-js'"
                                 :created={{ $file->created_at }}/>
 
-        @elseif (substr({{ $file->name }}, strrpos($file->name, '.')+1) === 'sql')
+        @elseif (substr( $file->name, strrpos($file->name, '.')+1) === 'sql')
             <x-layout-file-item :id="{{ $file->id }}" :name="{{ $file->name }}" :icon="'fas fa-database'"
                                 :created={{ $file->created_at }}/>
 
