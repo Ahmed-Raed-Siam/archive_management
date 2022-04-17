@@ -1,7 +1,7 @@
 @foreach ($files as $file )
     @if ($file->type === 'folder')
         <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'far fa-folder'"
-                            :created="$file->created_at" />
+                            :created="$file->created_at"/>
     @endif
 
     @if($file->file_type === 'application/pdf')
@@ -21,14 +21,6 @@
             <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fas fa-database'"
                                 :created="$file->created_at"/>
 
-        @elseif (substr($file->name, strrpos($file->name, '.')+1) === 'doc')
-            <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fas fa-file-word'"
-                                :created="$file->created_at"/>
-
-        @elseif (substr($file->name, strrpos($file->name, '.')+1) === 'css')
-            <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fab fa-css3-alt'"
-                                :created="$file->created_at"/>
-
         @elseif (substr($file->name, strrpos($file->name, '.')+1) === 'txt')
             <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fas fa-file-alt'"
                                 :created="$file->created_at"/>
@@ -36,7 +28,12 @@
         @endif
     @endif
 
-    @if ($file->file_type === 'image/svg')
+    @if (substr($file->name, strrpos($file->name, '.')+1) === 'css')
+        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fab fa-css3-alt'"
+                            :created="$file->created_at"/>
+    @endif
+
+    @if ($file->file_type === 'image/svg+xml')
         <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fas fa-code-branch'"
                             :created="$file->created_at"/>
     @endif
@@ -49,30 +46,40 @@
     @if ($file->file_type === 'image/png')
         <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fab fa-html5'"
                             :created="$file->created_at"
-                                :file="$file->file_path"/>
-            @endif
+                            :file="$file->file_path"/>
+    @endif
 
 
-            @if ($file->file_type === 'image/jpeg')
-                <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fab fa-html5'"
-                                    :created="$file->created_at"
-                                        :file="$file->file_path"/>
-                    @endif
+    @if ($file->file_type === 'image/jpeg')
+        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fab fa-html5'"
+                            :created="$file->created_at"
+                            :file="$file->file_path"/>
+    @endif
 
 
-                    @if ($file->file_type === 'application/json')
-                        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'far fa-hand-lizard'"
-                                            :created="$file->created_at"/>
-                    @endif
+    @if ($file->file_type === 'application/json')
+        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'far fa-hand-lizard'"
+                            :created="$file->created_at"/>
+    @endif
 
-                    @if ($file->file_type === 'audio/mpeg')
-                        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'far fa-file-audio'"
-                                            :created="$file->created_at"/>
-                    @endif
+    @if ($file->file_type === 'audio/mpeg')
+        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'far fa-file-audio'"
+                            :created="$file->created_at"/>
+    @endif
 
-                    @if ($file->file_type === 'video/mp4')
-                        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'far fa-file-video'"
-                                            :created="$file->created_at"/>
+    @if ($file->file_type === 'video/mp4')
+        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'far fa-file-video'"
+                            :created="$file->created_at"/>
+    @endif
+
+    @if (substr($file->name, strrpos($file->name, '.')+1) === 'doc' || substr($file->name, strrpos($file->name, '.')+1)==='docx')
+        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fas fa-file-word'"
+                            :created="$file->created_at"/>
+    @endif
+
+    @if ($file->file_type === 'application/x-httpd-php' || substr($file->name, strrpos($file->name, '.')+1) === 'php')
+        <x-layout-file-item :id="$file->id" :name="$file->name" :icon="'fab fa-php'"
+                            :created="$file->created_at"/>
     @endif
 
 @endforeach
