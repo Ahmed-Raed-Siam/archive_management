@@ -16,11 +16,11 @@ class FilesController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         //
         $files = files::orderByRaw("type <> 'folder'")->where('user_id', Auth::id())->where('parent_id', null)->get();
-        return view('home', compact('files'));
+        return response()->view('home', compact('files'));
     }
 
     /**
@@ -82,8 +82,19 @@ class FilesController extends Controller
             return redirect()->back();
         else:
             if ($request->post('folder')) :
-                $parent_folder = $find->parent();
-                $parent_folder_path = $parent_folder->first()->file_path;
+//                $parent_folder = $find->parent();
+                $parent_folder = $find->file_path;
+//                dd(
+//                    $find,
+////                    $request,
+//                    $request->file(),
+//                    'File Path',
+//                    $find->name,
+//                    $find->file_path,
+//                    $parent_folder,
+//                    $parent_folder->,
+//                );
+                $parent_folder_path = $find->file_path;
                 $folder = new files();
                 $folder->name = $request->post('folder');
                 $folder->parent_id = $num;
@@ -91,17 +102,18 @@ class FilesController extends Controller
                 $folder->type = 'folder';
 //                $folder->file_path = '/uploads/' . $user_name . '/' . $folder->name;
 //                $folder->file_path = $user_name . '/' . $find->name . '/' . $folder->name;
-                $folder->file_path = $parent_folder_path . '/' . $find->name . '/' . $folder->name;
+                $folder->file_path = $parent_folder_path . '/' . $folder->name;
 //                dd(
 //                    $find,
 //                    $request,
 //                    $request->file(),
-//                    $parent_folder->first(),
+////                    $parent_folder->first(),
 //                    $folder->file_path,
 //                    'File Path',
 //                    $find->name,
 //                    $find->file_path,
 //                    $parent_folder_path,
+//                    $parent_folder_path . '/' . $folder->name,
 //                );
                 $folder->save();
             endif;

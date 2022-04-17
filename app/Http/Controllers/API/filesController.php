@@ -40,7 +40,7 @@ class filesController extends Controller
             'files' => $files,
 //            $user,
 //            'user_id'=>$user->id,
-        ]);
+        ],200);
     }
 
     /**
@@ -243,7 +243,7 @@ class filesController extends Controller
         // Delete single folder or file
         $file_path = $file->file_path;
         // When We use Storage::disk('uploads') we must pass the path without Disk folder like: ahmed_raed_siam/Root not like the C:\xampp\htdocs\sFiles-main\public\/uploads/ahmed_raed_siam/Root/wmVquOlp5lsmwRwNgGyVdbjeDK18nL5bDlJcKCGw.png
-        if (Storage::disk('uploads')->exists($file->file_path)):
+        if (Storage::disk('uploads')->exists($file_path)):
             if ($file->type === 'folder'):
                 Storage::disk('uploads')->deleteDirectory($file_path);
                 $message = 'You Remove ' . $file->name . ' Folder from the database';
