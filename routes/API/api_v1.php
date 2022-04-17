@@ -47,7 +47,6 @@ Route::group([
 //])->parameters(['dashboard' => 'file']);
 
 Route::middleware('auth:sanctum')->get('auth/tokens', [AuthTokensController::class, 'index']);
-//Route::middleware('guest:sanctum')->post('auth/tokens', [AuthTokensController::class, 'store']);
 Route::middleware('guest:sanctum')->post('auth/tokens', [AuthTokensController::class, 'store']);
 Route::middleware('auth:sanctum')->delete('auth/tokens/logout', [AuthTokensController::class, 'current_logout']);
 Route::middleware('auth:sanctum')->delete('auth/tokens/{id}', [AuthTokensController::class, 'destroy']);
